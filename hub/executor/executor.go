@@ -3,6 +3,7 @@ package executor
 import (
 	"fmt"
 	"net/netip"
+	"io"
 	"os"
 	"runtime"
 	"strings"
@@ -37,10 +38,7 @@ import (
 var mux sync.Mutex
 
 func readConfig(path string) ([]byte, error) {
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		return nil, err
-	}
-	data, err := os.ReadFile(path)
+	data, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		return nil, err
 	}
