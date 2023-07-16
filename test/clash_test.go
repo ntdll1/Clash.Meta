@@ -124,11 +124,11 @@ func init() {
 }
 
 var clean = `
-port: 0
-socks-port: 0
-mixed-port: 0
-redir-port: 0
-tproxy-port: 0
+port: -1
+socks-port: -1
+mixed-port: -1
+redir-port: -1
+tproxy-port: -1
 dns:
 	enable: false
 `

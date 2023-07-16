@@ -135,7 +135,7 @@ func ReCreateHTTP(port int, tcpIn chan<- C.ConnContext) {
 		httpListener = nil
 	}
 
-	if portIsZero(addr) {
+	if portIsInvalid(addr) {
 		return
 	}
 
@@ -186,7 +186,7 @@ func ReCreateSocks(port int, tcpIn chan<- C.ConnContext, udpIn chan<- C.PacketAd
 		return
 	}
 
-	if portIsZero(addr) {
+	if portIsInvalid(addr) {
 		return
 	}
 
@@ -236,7 +236,7 @@ func ReCreateRedir(port int, tcpIn chan<- C.ConnContext, udpIn chan<- C.PacketAd
 		redirUDPListener = nil
 	}
 
-	if portIsZero(addr) {
+	if portIsInvalid(addr) {
 		return
 	}
 
@@ -433,7 +433,7 @@ func ReCreateTProxy(port int, tcpIn chan<- C.ConnContext, udpIn chan<- C.PacketA
 		tproxyUDPListener = nil
 	}
 
-	if portIsZero(addr) {
+	if portIsInvalid(addr) {
 		return
 	}
 
@@ -487,7 +487,7 @@ func ReCreateMixed(port int, tcpIn chan<- C.ConnContext, udpIn chan<- C.PacketAd
 		return
 	}
 
-	if portIsZero(addr) {
+	if portIsInvalid(addr) {
 		return
 	}
 
@@ -794,9 +794,10 @@ func GetPorts() *Ports {
 	return ports
 }
 
-func portIsZero(addr string) bool {
+func portIsInvalid(addr string) bool {
 	_, port, err := net.SplitHostPort(addr)
-	if port == "0" || port == "" || err != nil {
+	intPort, err1 := strconv.Atoi(port)
+	if intPort < 0 || intPort >= 65535 || err != nil || err1 != nil {
 		return true
 	}
 	return false
