@@ -330,6 +330,11 @@ func Parse(buf []byte) (*Config, error) {
 func UnmarshalRawConfig(buf []byte) (*RawConfig, error) {
 	// config with default value
 	rawCfg := &RawConfig{
+		Port:		-1,
+		SocksPort:	-1,
+		RedirPort:	-1,
+		TProxyPort:	-1,
+		MixedPort:	-1,
 		AllowLan:        false,
 		BindAddress:     "*",
 		IPv6:            true,
