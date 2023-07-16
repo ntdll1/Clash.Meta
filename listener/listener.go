@@ -757,30 +757,40 @@ func GetPorts() *Ports {
 		_, portStr, _ := net.SplitHostPort(httpListener.Address())
 		port, _ := strconv.Atoi(portStr)
 		ports.Port = port
+	} else {
+		ports.Port = -1
 	}
 
 	if socksListener != nil {
 		_, portStr, _ := net.SplitHostPort(socksListener.Address())
 		port, _ := strconv.Atoi(portStr)
 		ports.SocksPort = port
+	} else {
+		ports.SocksPort = -1
 	}
 
 	if redirListener != nil {
 		_, portStr, _ := net.SplitHostPort(redirListener.Address())
 		port, _ := strconv.Atoi(portStr)
 		ports.RedirPort = port
+	} else {
+		ports.RedirPort = -1
 	}
 
 	if tproxyListener != nil {
 		_, portStr, _ := net.SplitHostPort(tproxyListener.Address())
 		port, _ := strconv.Atoi(portStr)
 		ports.TProxyPort = port
+	} else {
+		ports.TProxyPort = -1
 	}
 
 	if mixedListener != nil {
 		_, portStr, _ := net.SplitHostPort(mixedListener.Address())
 		port, _ := strconv.Atoi(portStr)
 		ports.MixedPort = port
+	} else {
+		ports.MixedPort = -1
 	}
 
 	if shadowSocksListener != nil {
